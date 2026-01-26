@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.navbar {
+    display: flex;
+    background-color:gold;
+    padding: 10px;
+}
+.navbar a {
+    color: rgb(255, 255, 255);
+    padding: 14px 20px;
+    text-decoration: none;
+    text-align: left;
+}
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+header{
+    background-color: purple;
+    color: white;
+    height: 3em;
+    text-align: center;
+}
+.welcome{
+   
+    display: flex;
+    
+}
+
+.wel{
+    width: 40em;
+    height: 20em;
+    text-align: center;
+    font-size: 18px;
+}
+
+.pic{
+    
+    width: 40em;
+    height: 30em;
+    margin-left: 5em;
+}
+.skul{
+    width: 40em;
+    height: 30em;
+    object-fit: cover;
+}
+
+.goals{
+    width: 95%;
+    height: 20em;
+    display: flex;
+    gap: 1em;
+    padding: 2em;
+    
+}
+
+.goal{
+    width: 20%;
+    height: 15em;
+    background-color: gold;
+    margin-left: 2.5em;
+    text-align: center;
+}
+
+.vision{
+    width: 95%;
+    height: 20em;
+  
+    display: flex;
+    gap: 2.5em;
+    padding: 2em;
+}
+
+.vis{
+    width: 30%;
+    height: 30em;
+    background-color: gold;
+    margin-left: 1em;
+    text-align: center; 
+    
+    
+}
+
+.pis{
+    object-fit: cover;
+    width: 26.7em;
+    height: 20em;
+}
+
+.course{
+    width: 100%;
+    height: 30em;
+    padding: 1em;
+    display: flex;
+    gap: 2em;
+}
+
+.course2{
+  
+    width: 100%;
+    height: 30em;
+    padding: 1em;
+    display: flex;
+    gap: 2em;
+    
+}
+.cert{
+    width: 30%;
+    height: 30em;
+    background-color: gold;
+    margin-left: 1em;
+    text-align: center;    
+}
+
+
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: purple;
+    color: white;
+    padding: 20px;
+}
+
+.footer-column {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-column a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+}

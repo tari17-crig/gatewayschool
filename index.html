@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gateway Education Services - Home</title>
+    <meta name="description" content="Gateway Education Services provides quality education in Uganda with a holistic approach to learning.">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kawuku-Bwerenga, Entebbe, Uganda</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+256 7098 01 722</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@gatewayeducationservices.sc.ug</span>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="./assets/images/LOGOO2.png" alt="Gateway Education Services Logo">
+                </a>
+                <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="aboutus.html">About</a>
+                    <a href="Gallery.html">Gallery</a>
+                    <a href="addmission.html">Admission</a>
+                    <a href="contactus.html">Contact</a>
+                    <a href="addmission.html" class="btn-apply">Join us now</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Slider -->
+        <section class="hero-slider">
+            <div class="slideshow-container">
+                <div class="slide fade">
+                    <img src="./assets/images/real.jpg" alt="Students in academic setting">
+                    <div class="slide-content">
+                        <h2>Quality Education for a Brighter Future</h2>
+                        <p>Nurturing creative, critical thinkers prepared for an ever-changing world</p>
+                        <a href="addmission.html" class="btn-primary">Enroll Now</a>
+                    </div>
+                </div>
+                <div class="slide fade">
+                    <img src="./assets/images/real2.jpg" alt="School building">
+                    <div class="slide-content">
+                        <h2>State-of-the-Art Facilities</h2>
+                        <p>Providing an excellent learning environment for all students</p>
+                        <a href="Gallery.html" class="btn-primary">View Gallery</a>
+                    </div>
+                </div>
+                <div class="slide fade">
+                    <img src="./assets/images/lil.jpg" alt="Classroom setting">
+                    <div class="slide-content">
+                        <h2>Holistic Education Approach</h2>
+                        <p>Developing well-rounded individuals through diverse programs</p>
+                        <a href="aboutus.html" class="btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="prev" onclick="plusSlides(-1)" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="dots">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
+                <button class="next" onclick="plusSlides(1)" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="section-title">About <em>Gateway Education Service</em></h2>
+                    <p>Founded in 2011, Gateway Education Services opened its doors to bring quality education to the people of Uganda. Our passion for education, combined with constant innovation and fresh perspectives, continues to drive our success in nurturing future leaders.</p>
+                    <div class="about-features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>What We Do</h3>
+                            <p>We are a vibrant and inclusive community dedicated to nurturing creative, critical thinkers prepared to succeed in an ever-changing world.</p>
+                            <a href="aboutus.html" class="btn-secondary">Learn More</a>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3>Our Motto</h3>
+                            <p class="motto">THE LIGHT OF THE WORLD</p>
+                            <a href="aboutus.html" class="btn-secondary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Holistic Education Section -->
+        <section class="holistic-section">
+            <div class="container">
+                <div class="holistic-content">
+                    <div class="holistic-image">
+                        <img src="./assets/images/bulid l.jpg" alt="Gateway School Structure">
+                    </div>
+                    <div class="holistic-text">
+                        <h2 class="section-title">Holistic Education at Gateway</h2>
+                        <p>At Gateway Education Services, we redefine education by placing a strong emphasis on providing a holistic learning experience that goes beyond traditional academics. Our commitment extends to co-curricular, extracurricular, and super-curricular activities, shaping well-rounded individuals equipped with essential life skills and a passion for continuous growth.</p>
+                        <a href="#" class="btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services-section">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">We inspire minds and shape the future. Discover how our students are empowered to succeed.</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="assets/images/2222.jpg" alt="Classroom environment">
+                        </div>
+                        <h3>Conducive Learning Environment</h3>
+                        <p>Our classrooms are designed to foster concentration and creativity, providing the perfect setting for academic excellence.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="assets/images/lib.jpg" alt="School library">
+                        </div>
+                        <h3>Well-equipped Library</h3>
+                        <p>A resource-rich library that supports research, reading culture, and independent learning among our students.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="assets/images/bus.jpg" alt="School transportation">
+                        </div>
+                        <h3>Efficient Transportation</h3>
+                        <p>Safe and reliable school buses ensuring punctuality and convenience for our students and staff.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="assets/images/nini.jpg" alt="Student learning">
+                        </div>
+                        <h3>Personalized Learning</h3>
+                        <p>Our teaching methods cater to individual learning styles, ensuring every student achieves their full potential.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="assets/images/IMG-20240712-WA0004.jpg" alt="Sports activities">
+                        </div>
+                        <h3>Sports Programs</h3>
+                        <p>Comprehensive sports facilities and programs to promote physical fitness and teamwork.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-image">
+                            <img src="assets/images/mdd.jpg" alt="MDD competition">
+                        </div>
+                        <h3>Cultural Activities</h3>
+                        <p>Music, Dance and Drama competitions that nurture talent and cultural appreciation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Administration Section -->
+        <section class="admin-section">
+            <div class="container">
+                <h2 class="section-title">Our Administrators</h2>
+                <div class="admin-grid">
+                    <div class="admin-card">
+                        <div class="admin-image">
+                            <img src="assets/images/hm.jpg" alt="Headmaster Mr. Luswata Aaron">
+                        </div>
+                        <h3>Mr. Luswata Aaron</h3>
+                        <p>Headmaster</p>
+                    </div>
+                    <div class="admin-card">
+                        <div class="admin-image">
+                            <img src="assets/images/ddhm.jpg" alt="Deputy Headmaster Mr. Ahimbisibwe Ray">
+                        </div>
+                        <h3>Mr. Ahimbisibwe Ray</h3>
+                        <p>Deputy Headmaster</p>
+                    </div>
+                    <div class="admin-card">
+                        <div class="admin-image">
+                            <img src="assets/images/dos.jpg" alt="DOS Mrs. Owor Anna">
+                        </div>
+                        <h3>Mrs. Owor Anna</h3>
+                        <p>Director of Studies</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision and History Section -->
+        <section class="vision-history-section">
+            <div class="container">
+                <div class="vh-grid">
+                    <div class="vh-large">
+                        <img src="./assets/images/read.jpg" alt="Gateway Education Services campus">
+                    </div>
+                    <div class="vh-small">
+                        <img src="./assets/images/teach2.jpg" alt="School library interior">
+                    </div>
+                    <div class="vh-card vision">
+                        <div class="vh-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Our Vision</h3>
+                        <p>To inspire a love of learning that extends beyond the classroom, fostering a culture of innovation, creativity, and critical thinking. We empower students to become confident, compassionate, and engaged global citizens, prepared to make a positive difference in the world.</p>
+                    </div>
+                    <div class="vh-small">
+                        <img src="./assets/images/MDD2.jpg" alt="MDD performance">
+                    </div>
+                    <div class="vh-card history">
+                        <div class="vh-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3>Our History</h3>
+                        <p>In 2011 Gateway opened its doors and launched its journey to bring education to the people of Uganda. The passion for keeping the memory of why we started alive, mixed with constant innovation and search for new perspectives, continues to be our recipe for success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="why-choose-section">
+            <div class="container">
+                <h2 class="section-title">Why Choose Gateway</h2>
+                <div class="why-content">
+                    <div class="why-image">
+                        <img src="./assets/images/pexels-magda-ehlers-pexels-1337382.jpg" alt="Happy students at Gateway">
+                    </div>
+                    <div class="why-text">
+                        <p>Welcome to Gateway Education Services, where we ignite curiosity, foster creativity, and empower innovation. Our community is dedicated to inspiring minds and shaping the future.</p>
+                        <ul class="why-list">
+                            <li><i class="fas fa-check-circle"></i> Culture of excellence with academic rigor and personal growth</li>
+                            <li><i class="fas fa-check-circle"></i> Inspiring educators who are passionate mentors</li>
+                            <li><i class="fas fa-check-circle"></i> Collaborative environment that encourages teamwork</li>
+                            <li><i class="fas fa-check-circle"></i> Cutting-edge resources and state-of-the-art facilities</li>
+                            <li><i class="fas fa-check-circle"></i> Opportunities through scholarships and extracurriculars</li>
+                            <li><i class="fas fa-check-circle"></i> Supportive community of leaders and change-makers</li>
+                        </ul>
+                        <a href="contactus.html" class="btn-primary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <h2 class="section-title">What Parents & Students Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <i class="fas fa-quote-left"></i>
+                            <p>Gateway has provided my child with an excellent education and a nurturing environment. The teachers are dedicated and the facilities are top-notch.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <h4>Mrs. Nakato</h4>
+                            <p>Parent</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <i class="fas fa-quote-left"></i>
+                            <p>I've grown so much academically and personally at Gateway. The holistic approach to education has prepared me well for university and beyond.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <h4>David K.</h4>
+                            <p>Alumni</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <i class="fas fa-quote-left"></i>
+                            <p>The balance between academics and extracurricular activities at Gateway is perfect. My child is thriving in both areas and loves going to school.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <h4>Mr. Ssemwogerere</h4>
+                            <p>Parent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Join the Gateway Family?</h2>
+                    <p>Discover how Gateway Education Services can help your child achieve their full potential.</p>
+                    <div class="cta-buttons">
+                        <a href="addmission.html" class="btn-primary">Apply Now</a>
+                        <a href="contactus.html" class="btn-secondary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="Gallery.html">Gallery</a></li>
+                        <li><a href="addmission.html">Admission</a></li>
+                        <li><a href="contactus.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> gatewayeducationservices@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Entebbe Katabi, plot 198<br>P.O.BOX 700285 Entebbe, UG</li>
+                        <li><i class="fas fa-phone-alt"></i> +256 760 8679 60<br>+256 780 9234 55</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and news.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>We are a vibrant and inclusive community dedicated to nurturing creative, critical thinkers who are prepared to succeed in an ever-changing world.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 Gateway Education Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/js/index.js"></script>
+</body>
+
+</html>

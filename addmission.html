@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission - Gateway Education Services</title>
+
+    <meta name="description"
+        content="Apply for admission to Gateway Education Services. Join our vibrant learning community in Uganda.">
+    <link rel="stylesheet" href="./assets/css/addmission.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Bar with Contact Info -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Kawuku-Bwerenga, Entebbe, Uganda</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+256 7098 01 722</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@gatewayeducationservices.sc.ug</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="./assets/images/LOGOO2.png" alt="Gateway Education Services Logo">
+            </a>
+            <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="aboutus.html">About</a>
+                <a href="Gallery.html">Gallery</a>
+                <a href="addmission.html" class="active">Admission</a>
+                <a href="contactus.html">Contact</a>
+                <a href="addmission.html" class="btn-apply">Join us now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="admission-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="addmission.html" class="active">Admission</a>
+            </div>
+            <h1>Join Our Learning Community</h1>
+            <p>Begin your journey with Gateway Education Services today</p>
+        </div>
+    </section>
+
+    <main class="admission-main">
+        <!-- Admission Process Section -->
+        <section class="process-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Admission Process</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="process-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Submit Application</h3>
+                        <p>Complete and submit the online application form with all required documents.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>Assessment</h3>
+                        <p>Students may be required to take an assessment test depending on grade level.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Interview</h3>
+                        <p>An interview with the student and parents/guardians may be scheduled.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>Admission Decision</h3>
+                        <p>You will receive notification of the admission decision within 2 weeks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Form Section -->
+        <section class="form-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Application Form</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-subtitle">Please fill out the form below to begin the admission process</p>
+                </div>
+
+                <form class="admission-form" action="addmission.php" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="surname">Surname <span class="required">*</span></label>
+                            <input type="text" id="surname" name="surname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">First Name <span class="required">*</span></label>
+                            <input type="text" id="firstname" name="firstname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dateofbirth">Date of Birth <span class="required">*</span></label>
+                            <input type="date" id="dateofbirth" name="dateofbirth" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">Age <span class="required">*</span></label>
+                            <input type="number" id="age" name="age" min="1" max="25" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="classapplied">Class Applied For <span class="required">*</span></label>
+                        <select id="classapplied" name="classapplied" required>
+                            <option value="">Select Class</option>
+                            <option value="Nursery">Nursery</option>
+                            <option value="Primary 1">Primary 1</option>
+                            <option value="Primary 2">Primary 2</option>
+                            <option value="Primary 3">Primary 3</option>
+                            <option value="Primary 4">Primary 4</option>
+                            <option value="Primary 5">Primary 5</option>
+                            <option value="Primary 6">Primary 6</option>
+                            <option value="Primary 7">Primary 7</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="formerschool">Former School <span class="required">*</span></label>
+                        <input type="text" id="formerschool" name="formerschool" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="parentname">Parent's/Guardian's Name <span class="required">*</span></label>
+                        <input type="text" id="parentname" name="parentname" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nationality">Nationality <span class="required">*</span></label>
+                            <input type="text" id="nationality" name="nationality" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Additional Information</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+
+                    <div class="form-submit">
+                        <button type="submit" class="btn-primary">Submit Application</button>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+
+        <!-- Requirements Section -->
+        <section class="requirements-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Admission Requirements</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="requirements-content">
+                    <div class="requirements-list">
+                        <h3>Documents Needed</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Completed application form</li>
+                            <li><i class="fas fa-check-circle"></i> Copy of birth certificate</li>
+                            <li><i class="fas fa-check-circle"></i> Recent passport-sized photographs (2 copies)</li>
+                            <li><i class="fas fa-check-circle"></i> Previous school reports (where applicable)</li>
+                            <li><i class="fas fa-check-circle"></i> Transfer letter from previous school (where
+                                applicable)</li>
+                            <li><i class="fas fa-check-circle"></i> Medical form (provided by the school)</li>
+                        </ul>
+                    </div>
+                    <div class="requirements-image">
+                        <img src="./assets/images/room.jpg" alt="Gateway classroom">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fees Section -->
+        <section class="fees-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Fee Structure</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="fees-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Term 1 (UGX)</th>
+                                <th>Term 2 (UGX)</th>
+                                <th>Term 3 (UGX)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nursery</td>
+                                <td>1,200,000</td>
+                                <td>1,100,000</td>
+                                <td>1,000,000</td>
+                            </tr>
+                            <tr>
+                                <td>Primary 1-3</td>
+                                <td>1,500,000</td>
+                                <td>1,400,000</td>
+                                <td>1,300,000</td>
+                            </tr>
+                            <tr>
+                                <td>Primary 4-7</td>
+                                <td>1,800,000</td>
+                                <td>1,700,000</td>
+                                <td>1,600,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="fees-note">* Fees include tuition, textbooks, and basic stationery. Additional charges may
+                        apply for extracurricular activities.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Begin Your Journey?</h2>
+                    <p>Contact our admissions office for more information or to schedule a school tour.</p>
+                    <div class="cta-buttons">
+                        <a href="contactus.html" class="btn-primary">Contact Us</a>
+                        <a href="Gallery.html" class="btn-secondary">View Gallery</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="Gallery.html">Gallery</a></li>
+                        <li><a href="addmission.html">Admission</a></li>
+                        <li><a href="contactus.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> gatewayeducationservices@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Entebbe Kisubi, P.O.BOX 82 Entebbe, UG</li>
+                        <li><i class="fas fa-phone-alt"></i> +256 760 8679 60<br>+256 780 9234 55</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and news.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>We are a vibrant and inclusive community dedicated to nurturing creative, critical thinkers who
+                        are prepared to succeed in an ever-changing world.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 Gateway Education Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/js/admission.js"></script>
+
+   
+</body>
+
+</html>

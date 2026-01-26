@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Gateway Education Services</title>
+    <meta name="description" content="View our photo gallery showcasing campus life, activities, and events at Gateway Education Services.">
+    <link rel="stylesheet" href="./assets/css/Gallary.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Bar with Contact Info -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Kawuku-Bwerenga, Entebbe, Uganda</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+256 7098 01 722</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@gatewayeducationservices.sc.ug</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="./assets/images/LOGOO2.png" alt="Gateway Education Services Logo">
+            </a>
+            <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="aboutus.html">About</a>
+                <a href="Gallery.html" class="active">Gallery</a>
+                <a href="addmission.html">Admission</a>
+                <a href="contactus.html">Contact</a>
+                <a href="addmission.html" class="btn-apply">Join us now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="gallery-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="Gallery.html" class="active">Gallery</a>
+            </div>
+            <h1>Our School Gallery</h1>
+            <p>Explore moments from our vibrant school community</p>
+        </div>
+    </section>
+
+    <main class="gallery-main">
+        <!-- Gallery Filter -->
+        <section class="gallery-filter">
+            <div class="container">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="campus">Campus</button>
+                    <button class="filter-btn" data-filter="classrooms">Classrooms</button>
+                    <button class="filter-btn" data-filter="events">Events</button>
+                    <button class="filter-btn" data-filter="sports">Sports</button>
+                    <button class="filter-btn" data-filter="mdd">Music/Dance/Drama</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Grid -->
+        <section class="gallery-grid-section">
+            <div class="container">
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-category="campus">
+                        <img src="./assets/images/bulid l.jpg" alt="Gateway Education Services Campus" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Our Beautiful Campus</h3>
+                            <p>View of our main school building</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="classrooms">
+                        <img src="./assets/images/real.jpg" alt="Students in classroom" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Interactive Learning</h3>
+                            <p>Students engaged in classroom activities</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="classrooms">
+                        <img src="./assets/images/clara.jpg" alt="Classroom environment" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Modern Classrooms</h3>
+                            <p>Our well-equipped learning spaces</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="campus">
+                        <img src="./assets/images/that.jpg" alt="Academic building" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Academic Excellence</h3>
+                            <p>Where learning comes to life</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="campus">
+                        <img src="./assets/images/lib.jpg" alt="School library" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Resourceful Library</h3>
+                            <p>Our well-stocked learning resource center</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="events">
+                        <img src="./assets/images/eve.jpg" alt="Student presentation" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Student Presentation</h3>
+                            <p>Developing confidence and skills</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="events">
+                        <img src="./assets/images/real2.jpg" alt="School event" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Annual Event</h3>
+                            <p>Celebrating school achievements</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="sports">
+                        <img src="./assets/images/IMG-20240712-WA0003.jpg" alt="Sports day" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Sports Day</h3>
+                            <p>Students participating in athletics</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="sports">
+                        <img src="./assets/images/IMG-20240712-WA0004.jpg" alt="Basketball game" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Basketball Team</h3>
+                            <p>Our talented basketball players</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="events">
+                        <img src="./assets/images/WhatsApp Image 2024-07-29 at 09.07.04_e3c17c01.jpg" alt="School assembly" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Morning Assembly</h3>
+                            <p>Students gathering for announcements</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="mdd">
+                        <img src="./assets/images/mdd new.jpg" alt="Cultural performance" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Cultural Performance</h3>
+                            <p>Students showcasing traditional dance</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="mdd">
+                        <img src="./assets/images/mdd.jpg" alt="Drama performance" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Drama Club</h3>
+                            <p>Students performing a play</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="mdd">
+                        <img src="./assets/images/mdd4.jpg" alt="Music performance" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Music Festival</h3>
+                            <p>School choir performance</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="mdd">
+                        <img src="./assets/images/mddd.jpg" alt="Dance performance" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Dance Competition</h3>
+                            <p>Students showcasing their talent</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="mdd">
+                        <img src="./assets/images/MDD2.jpg" alt="MDD competition" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Annual MDD Competition</h3>
+                            <p>Inter-house cultural competition</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="mdd">
+                        <img src="./assets/images/mddd2.jpg" alt="Drama scene" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Theatrical Performance</h3>
+                            <p>Students in a dramatic scene</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-category="mdd">
+                        <img src="./assets/images/MDD3.jpg" alt="Cultural dance" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Traditional Dance</h3>
+                            <p>Celebrating Ugandan culture</p>
+                        </div>
+                        <div class="gallery-item" data-category="mdd">
+                        <img src="./assets/images/mdd new.jpg" alt="Cultural performance" class="gallery-img">
+                        <div class="gallery-overlay">
+                            <h3>Cultural Performance</h3>
+                            <p>Students showcasing traditional dance</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery CTA Section -->
+        <section class="gallery-cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Experience Gateway Education Services</h2>
+                    <p>Schedule a visit to see our campus and facilities in person</p>
+                    <div class="cta-buttons">
+                        <a href="contactus.html" class="btn-primary">Schedule a Visit</a>
+                        <a href="addmission.html" class="btn-secondary">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="lightbox-caption"></div>
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="Gallery.html">Gallery</a></li>
+                        <li><a href="addmission.html">Admission</a></li>
+                        <li><a href="contactus.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> gatewayeducationservices@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Entebbe Kisubi, P.O.BOX 82 Entebbe, UG</li>
+                        <li><i class="fas fa-phone-alt"></i> +256 760 8679 60<br>+256 780 9234 55</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and news.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>We are a vibrant and inclusive community dedicated to nurturing creative, critical thinkers who are prepared to succeed in an ever-changing world.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 Gateway Education Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/js/Gallary.js"></script>
+    <script src="./assets/js/Gallary.js"></script>
+</body>
+
+</html>

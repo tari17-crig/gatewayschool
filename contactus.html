@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Gateway Education Services</title>
+    <meta name="description" content="Contact Gateway Education Services. Reach out for inquiries, school visits, or more information about our programs.">
+    <link rel="stylesheet" href="./assets/css/contact us.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Top Bar with Contact Info -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Kawuku-Bwerenga, Entebbe, Uganda</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+256 7098 01 722</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@gatewayeducationservices.sc.ug</span>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="./assets/images/LOGOO2.png" alt="Gateway Education Services Logo">
+            </a>
+            <button class="menu-toggle" aria-label="Toggle navigation" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="aboutus.html">About</a>
+                <a href="Gallery.html">Gallery</a>
+                <a href="addmission.html">Admission</a>
+                <a href="contactus.html" class="active">Contact</a>
+                <a href="addmission.html" class="btn-apply">Join us now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="contactus.html" class="active">Contact</a>
+            </div>
+            <h1>Get In Touch With Us</h1>
+            <p>We'd love to hear from you. Reach out for inquiries, school visits, or more information.</p>
+        </div>
+    </section>
+
+    <main class="contact-main">
+        <!-- Contact Form Section -->
+        <section class="contact-form-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="form-container">
+                        <div class="section-header">
+                            <h2 class="section-title">Send Us a Message</h2>
+                            <div class="section-divider"></div>
+                        </div>
+                        <form class="contact-form" action="contact.php" method="POST" id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" placeholder="Your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="Your email address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Your phone number">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" name="subject">
+                                    <option value="">Select a subject</option>
+                                    <option value="Admission">Admission Inquiry</option>
+                                    <option value="General">General Inquiry</option>
+                                    <option value="Visit">School Visit Request</option>
+                                    <option value="Feedback">Feedback</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message <span class="required">*</span></label>
+                                <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+                            </div>
+                            <div class="form-submit">
+                                <button type="submit" class="btn-primary">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info Section -->
+                    <div class="info-container">
+                        <div class="section-header">
+                            <h2 class="section-title">Contact Information</h2>
+                            <div class="section-divider"></div>
+                        </div>
+                        <div class="contact-info-cards">
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Main Campus</h3>
+                                    <p>Entebbe Katabi, plot 198<br>P.O.BOX 700285 Entebbe, UG</p>
+                                </div>
+                            </div>
+                           
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Email Address</h3>
+                                    <p>gatewayeducationservices@gmail.com<br>gatewayeducationservices@outlook.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Phone Numbers</h3>
+                                    <p>+256 760 8679 60<br>+256 780 9234 55</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media Links -->
+                        <div class="social-media">
+                            <h3>Connect With Us</h3>
+                            <div class="social-links">
+                                <a href="#" aria-label="Facebook" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" aria-label="Twitter" class="social-link"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="Instagram" class="social-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" aria-label="LinkedIn" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" aria-label="YouTube" class="social-link"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Our Location</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8067455836085!2d32.57409827485354!3d0.13801209986063173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177d9184c5ba0281%3A0xe171ecd2675b7304!2sGateway%20Nursery%20and%20Primary%20school%20Bwerenga%20Kisubi%20Uganda!5e0!3m2!1sen!2sug!4v1721376557933!5m2!1sen!2sug" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Hours Section -->
+        <section class="hours-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Office Hours</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="hours-container">
+                    <div class="hours-card">
+                        <div class="hours-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="hours-details">
+                            <h3>School Hours</h3>
+                            <ul>
+                                <li><strong>Monday - Friday:</strong> 7:30 AM - 5:00 PM</li>
+                                <li><strong>Saturday:</strong> 9:00 AM - 1:00 PM</li>
+                                <li><strong>Sunday:</strong> Closed</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="hours-card">
+                        <div class="hours-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="hours-details">
+                            <h3>Admission Office</h3>
+                            <ul>
+                                <li><strong>Monday - Friday:</strong> 8:00 AM - 4:00 PM</li>
+                                <li><strong>Saturday:</strong> 9:00 AM - 12:00 PM</li>
+                                <li><strong>Sunday:</strong> Closed</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="aboutus.html">About</a></li>
+                        <li><a href="Gallery.html">Gallery</a></li>
+                        <li><a href="addmission.html">Admission</a></li>
+                        <li><a href="contactus.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> gatewayeducationservices@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Entebbe Kisubi, P.O.BOX 82 Entebbe, UG</li>
+                        <li><i class="fas fa-phone-alt"></i> +256 760 8679 60<br>+256 780 9234 55</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for the latest updates and news.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>We are a vibrant and inclusive community dedicated to nurturing creative, critical thinkers who are prepared to succeed in an ever-changing world.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2024 Gateway Education Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./assets/js/contact.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Gateway Education Services</title>
+    <link rel="stylesheet" href="./assets/css/addmission.css">
+    <style>
+        .error-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .error-icon {
+            font-size: 80px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .error-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .error-message {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+        }
+        .action-buttons {
+            margin-top: 30px;
+        }
+        .btn-home, .btn-retry {
+            display: inline-block;
+            padding: 12px 30px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin: 0 10px;
+        }
+        .btn-home {
+            background-color: #3498db;
+        }
+        .btn-home:hover {
+            background-color: #2980b9;
+        }
+        .btn-retry {
+            background-color: #e74c3c;
+        }
+        .btn-retry:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include your header/navigation from addmission.html -->
+    
+    <div class="error-container">
+        <div class="error-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h1 class="error-title">Application Submission Failed</h1>
+        <p class="error-message">
+            We're sorry, but there was an error processing your application. 
+            Please try again later or contact our admissions office for assistance.
+        </p>
+        
+        <div class="action-buttons">
+            <a href="index.html" class="btn-home">Return to Homepage</a>
+            <a href="addmission.html" class="btn-retry">Try Again</a>
+        </div>
+    </div>
+    
+    <!-- Include your footer from addmission.html -->
+</body>
+</html>
