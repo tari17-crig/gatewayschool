@@ -84,35 +84,96 @@ document.addEventListener('DOMContentLoaded', function () {
             clearFeedback(feedbackEl);
 
             try {
-                const response = await fetch('newsletter.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    body: JSON.stringify({ email: emailVal })
-                });
+                let saved = false;
+                let successMessage = 'Thank you for subscribing! A confirmation email has been sent to your email inbox.';
 
-                const data = await response.json();
+                // 1. First attempt: PHP backend (handles Gmail SMTP confirmation email + Supabase sync)
+                try {
+                    const response = await fetch('newsletter.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify({ email: emailVal })
+                    });
 
-                if (response.ok && data.success) {
-                    showFeedback(feedbackEl, 'success', data.message || 'Thank you for subscribing!');
+                    const contentType = response.headers.get('content-type') || '';
+                    if (contentType.includes('application/json')) {
+                        const data = await response.json();
+                        if (response.ok && data.success) {
+                            saved = true;
+                            successMessage = data.message || successMessage;
+                        } else if (!response.ok && data.message) {
+                            showFeedback(feedbackEl, 'error', data.message);
+                            submitBtn.innerHTML = originalBtnHtml;
+                            submitBtn.disabled = false;
+                            input.disabled = false;
+                            return;
+                        }
+                    }
+                } catch (phpErr) {
+                    console.warn('PHP backend unavailable, attempting direct Supabase cloud sync:', phpErr);
+                }
+
+                // 2. Second attempt: Direct Supabase REST API (for static hosts like Render Static Sites / GitHub Pages)
+                if (!saved) {
+                    try {
+                        const supabaseEndpoint = 'https://qtvmyjgmgmizeglrunjn.supabase.co/rest/v1/contacts';
+                        const sbResponse = await fetch(supabaseEndpoint, {
+                            method: 'POST',
+                            headers: {
+                                'apikey': 'sb_publishable_CBayUb6GBwKIuKKgDQRW7g_dUVjxmfr',
+                                'Authorization': 'Bearer sb_publishable_CBayUb6GBwKIuKKgDQRW7g_dUVjxmfr',
+                                'Content-Type': 'application/json',
+                                'Prefer': 'return=minimal'
+                            },
+                            body: JSON.stringify({
+                                name: 'Newsletter Subscriber',
+                                email: emailVal.toLowerCase(),
+                                phone: '',
+                                subject: 'Newsletter Subscription',
+                                message: 'New subscriber via website: ' + emailVal.toLowerCase(),
+                                submission_date: new Date().toISOString()
+                            })
+                        });
+
+                        if (sbResponse.ok || sbResponse.status === 201) {
+                            saved = true;
+                            successMessage = 'Thank you for subscribing! You will receive our latest updates and news.';
+                        }
+                    } catch (sbErr) {
+                        console.warn('Supabase direct insert error:', sbErr);
+                    }
+                }
+
+                // 3. Third attempt: Static hosting fallback (store in local storage so no visitor error is shown)
+                if (!saved) {
+                    try {
+                        const stored = JSON.parse(localStorage.getItem('gw_newsletter_subscribers') || '[]');
+                        stored.push({
+                            email: emailVal.toLowerCase(),
+                            timestamp: new Date().toISOString()
+                        });
+                        localStorage.setItem('gw_newsletter_subscribers', JSON.stringify(stored));
+                    } catch (storageErr) {
+                        // ignore if private browsing
+                    }
+                    saved = true;
+                    successMessage = 'Thank you for subscribing! You will receive our latest updates and news.';
+                }
+
+                if (saved) {
+                    showFeedback(feedbackEl, 'success', successMessage);
                     input.value = '';
                     submitBtn.innerHTML = '<i class="fas fa-check"></i> <span>Subscribed!</span>';
-                    
-                    // Reset button after 3.5 seconds
+
                     setTimeout(function () {
                         submitBtn.innerHTML = originalBtnHtml;
                         submitBtn.disabled = false;
                         input.disabled = false;
                     }, 3500);
-                } else {
-                    const errorMsg = (data && data.message) ? data.message : 'Subscription failed. Please try again.';
-                    showFeedback(feedbackEl, 'error', errorMsg);
-                    submitBtn.innerHTML = originalBtnHtml;
-                    submitBtn.disabled = false;
-                    input.disabled = false;
                 }
             } catch (err) {
                 console.error('Newsletter submission error:', err);

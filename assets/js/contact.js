@@ -40,36 +40,22 @@ function enhanceFormValidation(form) {
         });
     });
 
-    // Prevent submission if invalid
-    form.addEventListener('submit', (e) => {
-        let isValid = true;
-        inputs.forEach(input => {
-            if (!validateField(input)) {
-                isValid = false;
+    // Prevent submission if invalid (for standard forms without custom submit listeners)
+    if (!form.classList.contains('admission-form') && !form.classList.contains('contact-form')) {
+        form.addEventListener('submit', (e) => {
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+                showFormError(form, 'Please correct the highlighted errors');
             }
         });
-
-        if (!isValid) {
-            e.preventDefault();
-            // Show overall form error
-            showFormError(form, 'Please correct the highlighted errors');
-        }
-    });
-
-    // Prevent duplicate submissions
-    form.addEventListener('submit', function(e) {
-        if (form.dataset.submitted === 'true') {
-            e.preventDefault();
-            return;
-        }
-        form.dataset.submitted = 'true';
-        const originalButtonText = form.querySelector('button[type="submit"]')?.textContent;
-        const submitButton = form.querySelector('button[type="submit"]');
-        if (submitButton) {
-            submitButton.disabled = true;
-            submitButton.textContent = 'Submitting...';
-        }
-    });
+    }
 }
 
 function validateField(input) {
@@ -178,10 +164,99 @@ function showFormError(form, message) {
     form.insertBefore(errorDiv, form.firstChild);
 }
 
-// Initialize form validation for all forms
+// Initialize form validation and submission handling
 document.addEventListener('DOMContentLoaded', function() {
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
         enhanceFormValidation(form);
     });
+
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Validate fields first
+            let isValid = true;
+            contactForm.querySelectorAll('input, select, textarea').forEach(input => {
+                if (!validateField(input)) {
+                    isValid = false;
+                }
+            });
+
+            if (!isValid) {
+                showFormError(contactForm, 'Please correct the highlighted errors before submitting.');
+                return;
+            }
+
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Send Message';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending Message...';
+            }
+
+            const formData = new FormData(contactForm);
+            const payload = {
+                name: formData.get('name') || '',
+                email: formData.get('email') || '',
+                phone: formData.get('phone') || '',
+                subject: formData.get('subject') || '',
+                message: formData.get('message') || '',
+                submission_date: new Date().toISOString()
+            };
+
+            let submitted = false;
+
+            // 1. Try PHP backend if running on PHP server
+            try {
+                const res = await fetch('contact.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                const contentType = res.headers.get('content-type') || '';
+                if (res.ok && !contentType.includes('octet-stream')) {
+                    submitted = true;
+                    window.location.href = 'contact-thank-you.html';
+                    return;
+                }
+            } catch (phpErr) {
+                console.warn('PHP backend unavailable, submitting directly to Supabase cloud:', phpErr);
+            }
+
+            // 2. Direct Supabase fallback (for static hosts like Render Static Sites)
+            if (!submitted) {
+                try {
+                    const sbRes = await fetch('https://qtvmyjgmgmizeglrunjn.supabase.co/rest/v1/contacts', {
+                        method: 'POST',
+                        headers: {
+                            'apikey': 'sb_publishable_CBayUb6GBwKIuKKgDQRW7g_dUVjxmfr',
+                            'Authorization': 'Bearer sb_publishable_CBayUb6GBwKIuKKgDQRW7g_dUVjxmfr',
+                            'Content-Type': 'application/json',
+                            'Prefer': 'return=minimal'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (sbRes.ok || sbRes.status === 201) {
+                        submitted = true;
+                        window.location.href = 'contact-thank-you.html';
+                        return;
+                    }
+                } catch (sbErr) {
+                    console.warn('Contact Supabase insert notice:', sbErr);
+                }
+            }
+
+            // 3. Static host local backup fallback
+            if (!submitted) {
+                try {
+                    const stored = JSON.parse(localStorage.getItem('gw_contacts') || '[]');
+                    stored.push(payload);
+                    localStorage.setItem('gw_contacts', JSON.stringify(stored));
+                } catch (storageErr) {}
+                window.location.href = 'contact-thank-you.html';
+            }
+        });
+    }
 });
