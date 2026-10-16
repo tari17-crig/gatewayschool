@@ -9,6 +9,7 @@
     <meta name="description"
         content="Apply for admission to Gateway Education Services. Join our vibrant learning community in Uganda.">
     <link rel="stylesheet" href="./assets/css/addmission.css">
+    <link rel="stylesheet" href="./assets/css/newsletter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -211,7 +212,7 @@
                         </ul>
                     </div>
                     <div class="requirements-image">
-                        <img src="./assets/images/room.jpg" alt="Gateway classroom">
+                        <img src="./assets/images/room.jpg" alt="Gateway classroom" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -301,9 +302,12 @@
                 <div class="footer-col">
                     <h3>Newsletter</h3>
                     <p>Subscribe to our newsletter for the latest updates and news.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Your email address" required>
+                    <form class="newsletter-form" action="newsletter.php" method="POST" novalidate>
+                        <div class="newsletter-input-wrap">
+                            <input type="email" name="email" placeholder="Your email address" required aria-label="Your email address">
+                        </div>
                         <button type="submit">Subscribe</button>
+                        <div class="newsletter-feedback" role="alert" aria-live="polite"></div>
                     </form>
                 </div>
                 <div class="footer-col">
@@ -327,6 +331,7 @@
     </footer>
 
     <script src="./assets/js/admission.js"></script>
+    <script src="./assets/js/newsletter.js" defer></script>
 
    
 </body>

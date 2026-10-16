@@ -1,0 +1,133 @@
+/**
+ * Gateway Education Services - Newsletter Form Styling
+ * Seamless integration with site design tokens and responsive animations.
+ */
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    width: 100%;
+}
+
+.newsletter-input-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.newsletter-form input[type="email"] {
+    width: 100%;
+    padding: 13px 16px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm, 6px);
+    border: 1px solid rgba(102, 187, 106, 0.35);
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.96);
+    color: var(--color-text-dark, #1a2e1d);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    box-sizing: border-box;
+}
+
+.newsletter-form input[type="email"]::placeholder {
+    color: #718774;
+}
+
+.newsletter-form input[type="email"]:hover,
+.newsletter-form input[type="email"]:focus {
+    border-color: var(--color-secondary-light, #66bb6a);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.25);
+}
+
+.newsletter-form button[type="submit"] {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: linear-gradient(135deg, var(--color-secondary-bright, #43a047) 0%, var(--color-secondary, #2e7d32) 100%);
+    color: #ffffff;
+    padding: 13px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border: none;
+    border-radius: var(--radius-sm, 6px);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+    box-sizing: border-box;
+}
+
+.newsletter-form button[type="submit"]:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--color-secondary-light, #66bb6a) 0%, var(--color-secondary-bright, #43a047) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px var(--color-secondary-glow, rgba(67, 160, 71, 0.35));
+}
+
+.newsletter-form button[type="submit"]:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.newsletter-form button[type="submit"]:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Feedback message container */
+.newsletter-feedback {
+    display: none;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm, 6px);
+    margin-top: 2px;
+    box-sizing: border-box;
+    animation: newsletterFadeIn 0.3s ease-out forwards;
+}
+
+.newsletter-feedback.show {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.newsletter-feedback i {
+    font-size: 1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.newsletter-feedback.success {
+    background: rgba(46, 125, 50, 0.15);
+    border: 1px solid rgba(102, 187, 106, 0.6);
+    color: #c8e6c9;
+}
+
+.newsletter-feedback.success i {
+    color: #81c784;
+}
+
+.newsletter-feedback.error {
+    background: rgba(229, 57, 53, 0.15);
+    border: 1px solid rgba(239, 83, 80, 0.5);
+    color: #ffcdd2;
+}
+
+.newsletter-feedback.error i {
+    color: #ef5350;
+}
+
+@keyframes newsletterFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

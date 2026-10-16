@@ -7,6 +7,7 @@
     <title>Thank You - Gateway Education Services</title>
     <meta name="description" content="Thank you for contacting Gateway Education Services. We'll get back to you soon.">
     <link rel="stylesheet" href="./assets/css/contact-thank-you.css">
+    <link rel="stylesheet" href="./assets/css/newsletter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -135,9 +136,12 @@
                 <div class="footer-col">
                     <h3>Newsletter</h3>
                     <p>Subscribe to our newsletter for the latest updates and news.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Your email address" required>
+                    <form class="newsletter-form" action="newsletter.php" method="POST" novalidate>
+                        <div class="newsletter-input-wrap">
+                            <input type="email" name="email" placeholder="Your email address" required aria-label="Your email address">
+                        </div>
                         <button type="submit">Subscribe</button>
+                        <div class="newsletter-feedback" role="alert" aria-live="polite"></div>
                     </form>
                 </div>
                 <div class="footer-col">
@@ -160,5 +164,6 @@
     </footer>
 
     <script src="./assets/js/contact-thank-you.js"></script>
+    <script src="./assets/js/newsletter.js" defer></script>
 </body>
 </html>
