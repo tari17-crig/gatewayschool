@@ -36,12 +36,14 @@ Stores contact inquiries from [`contactus.html`](file:///c:/Users/TALEMWA%20RICH
 - `name`, `email` *(Bug fixed: email is now properly stored!)*, `phone`, `subject`, `message`
 - `submission_date`, `created_at`
 
-### 3. `newsletters` Table
+### 3. `newsletter_subscribers` Table
 Stores newsletter subscriber emails from the website footer:
 - `id` (Primary Key, Auto-increment)
-- `email` (Unique, Lowercase)
+- `email` (Unique, Lowercase, Max 255 chars)
 - `status` (`'subscribed'`)
+- `ip_address` (Client IP for verification & analytics)
 - `subscribed_at`, `created_at`
+- *Includes backward-compatible view: `newsletters`*
 
 All tables have **Row Level Security (RLS)** enabled:
 - **Public / Website visitors**: Can submit applications, contact messages, and newsletter signups (`INSERT`).

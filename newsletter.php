@@ -112,16 +112,22 @@ if (!$alreadySubscribed) {
 }
 
 // 2. Insert into Supabase
-// First attempt: try dedicated 'newsletters' table
+// First attempt: try dedicated 'newsletter_subscribers' table
 $newsletterPayload = [
     'email'         => strtolower($email),
     'status'        => 'subscribed',
+    'ip_address'    => $_SERVER['REMOTE_ADDR'] ?? 'unknown',
     'subscribed_at' => date('c')
 ];
 
-$supabaseResult = supabase_insert('newsletters', $newsletterPayload);
+$supabaseResult = supabase_insert('newsletter_subscribers', $newsletterPayload);
 
-// If 'newsletters' table doesn't exist (HTTP 404), fallback to 'contacts' table
+// If 'newsletter_subscribers' table doesn't exist (HTTP 404), fallback to 'newsletters' table
+if (!$supabaseResult['success'] && $supabaseResult['status'] === 404) {
+    $supabaseResult = supabase_insert('newsletters', $newsletterPayload);
+}
+
+// If neither dedicated table exists, fallback to 'contacts' table
 if (!$supabaseResult['success'] && $supabaseResult['status'] === 404) {
     $contactsPayload = [
         'name'            => 'Newsletter Subscriber',
