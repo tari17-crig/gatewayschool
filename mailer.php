@@ -47,20 +47,23 @@ function get_mail_config() {
     };
 
     return [
-        'smtp_host'   => $get('SMTP_HOST', ''),
-        'smtp_port'   => (int)($get('SMTP_PORT', '587')),
-        'smtp_secure' => strtolower($get('SMTP_SECURE', 'tls')),
-        'smtp_user'   => $get('SMTP_USER', ''),
-        'smtp_pass'   => $get('SMTP_PASS', ''),
-        'from_email'  => $get('SMTP_FROM_EMAIL', 'taritech17@gmail.com'),
-        'from_name'   => $get('SMTP_FROM_NAME', 'Gateway Education Services'),
-        'reply_to'    => $get('SMTP_REPLY_TO', 'taritech17@gmail.com'),
-        'site_url'    => $get('SITE_URL', 'http://localhost:8000')
+        'mail_webhook_url' => $get('MAIL_WEBHOOK_URL', ''),
+        'resend_api_key'   => $get('RESEND_API_KEY', ''),
+        'brevo_api_key'    => $get('BREVO_API_KEY', ''),
+        'smtp_host'        => $get('SMTP_HOST', ''),
+        'smtp_port'        => (int)($get('SMTP_PORT', '587')),
+        'smtp_secure'      => strtolower($get('SMTP_SECURE', 'tls')),
+        'smtp_user'        => $get('SMTP_USER', ''),
+        'smtp_pass'        => $get('SMTP_PASS', ''),
+        'from_email'       => $get('SMTP_FROM_EMAIL', 'taritech17@gmail.com'),
+        'from_name'        => $get('SMTP_FROM_NAME', 'Gateway Education Services'),
+        'reply_to'         => $get('SMTP_REPLY_TO', 'taritech17@gmail.com'),
+        'site_url'         => $get('SITE_URL', 'http://localhost:8000')
     ];
 }
 
 /**
- * Sends an email using SMTP socket or fallback to PHP mail().
+ * Sends an email using HTTP Webhook, Resend, Brevo, SMTP socket, or PHP mail().
  *
  * @param string $to Recipient email
  * @param string $subject Email subject line
@@ -82,10 +85,55 @@ function send_email($to, $subject, $htmlContent, $plainText = '') {
         'error'   => null
     ];
 
-    // 1. If SMTP is configured, attempt SMTP transmission
-    if (!empty($config['smtp_host']) && !empty($config['smtp_user'])) {
+    // 1. Attempt HTTPS Webhook (e.g. Google Apps Script Web App - bypasses all port blocks on Render)
+    if (!empty($config['mail_webhook_url'])) {
+        $hookResult = send_via_webhook($to, $subject, $htmlContent, $plainText, $config);
+        if ($hookResult['success']) {
+            $result = [
+                'success' => true,
+                'method'  => 'webhook',
+                'error'   => null
+            ];
+        } else {
+            error_log("Mail webhook failed: " . $hookResult['error']);
+            $result['error'] = 'Webhook Error: ' . $hookResult['error'];
+        }
+    }
+
+    // 2. Attempt Resend REST API (HTTPS port 443 - generous free tier, never blocked by Render)
+    if (!$result['success'] && !empty($config['resend_api_key'])) {
+        $resendResult = send_via_resend($to, $subject, $htmlContent, $plainText, $config);
+        if ($resendResult['success']) {
+            $result = [
+                'success' => true,
+                'method'  => 'resend',
+                'error'   => null
+            ];
+        } else {
+            error_log("Resend API failed: " . $resendResult['error']);
+            $result['error'] = 'Resend Error: ' . $resendResult['error'];
+        }
+    }
+
+    // 3. Attempt Brevo REST API (HTTPS port 443 - 300 free emails/day)
+    if (!$result['success'] && !empty($config['brevo_api_key'])) {
+        $brevoResult = send_via_brevo($to, $subject, $htmlContent, $plainText, $config);
+        if ($brevoResult['success']) {
+            $result = [
+                'success' => true,
+                'method'  => 'brevo',
+                'error'   => null
+            ];
+        } else {
+            error_log("Brevo API failed: " . $brevoResult['error']);
+            $result['error'] = 'Brevo Error: ' . $brevoResult['error'];
+        }
+    }
+
+    // 4. Attempt Direct SMTP (works locally, cPanel, VPS, or Render Paid tier)
+    if (!$result['success'] && !empty($config['smtp_host']) && !empty($config['smtp_user'])) {
         if (empty($config['smtp_pass'])) {
-            $result['error'] = 'SMTP_PASS (Google App Password) is required in .env for ' . $config['smtp_user'];
+            $result['error'] = 'SMTP_PASS (Google App Password) is required in environment for ' . $config['smtp_user'];
         } else {
             $smtpResult = send_smtp_socket(
                 $to,
@@ -107,7 +155,7 @@ function send_email($to, $subject, $htmlContent, $plainText = '') {
         }
     }
 
-    // 2. Fallback to native PHP mail() if SMTP not configured or failed
+    // 5. Fallback to native PHP mail() if SMTP/APIs not configured or failed
     if (!$result['success']) {
         $boundary = "----=_Part_" . md5(uniqid(time(), true));
         $headers  = "From: " . encode_mime_header($config['from_name']) . " <" . $config['from_email'] . ">\r\n";
@@ -141,7 +189,7 @@ function send_email($to, $subject, $htmlContent, $plainText = '') {
         }
     }
 
-    // 3. Always log the outgoing email for developer transparency & audit
+    // 6. Always log the outgoing email for developer transparency & audit
     log_sent_email([
         'to'        => $to,
         'subject'   => $subject,
@@ -157,19 +205,168 @@ function send_email($to, $subject, $htmlContent, $plainText = '') {
 }
 
 /**
+ * Sends email via generic HTTPS Webhook (e.g. Google Apps Script Web App).
+ */
+function send_via_webhook($to, $subject, $htmlContent, $plainText, array $config) {
+    $webhookUrl = trim($config['mail_webhook_url']);
+    if (empty($webhookUrl)) {
+        return ['success' => false, 'error' => 'Webhook URL missing'];
+    }
+
+    $payload = [
+        'to'         => $to,
+        'subject'    => $subject,
+        'html'       => $htmlContent,
+        'text'       => $plainText,
+        'from_name'  => $config['from_name'],
+        'from_email' => $config['from_email']
+    ];
+
+    $ch = curl_init($webhookUrl);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Accept: application/json'
+    ]);
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlErr = curl_error($ch);
+    curl_close($ch);
+
+    if ($curlErr) {
+        return ['success' => false, 'error' => 'Webhook connection error: ' . $curlErr];
+    }
+
+    if ($httpCode >= 200 && $httpCode < 400) {
+        return ['success' => true, 'error' => null];
+    }
+
+    return ['success' => false, 'error' => "Webhook returned HTTP {$httpCode}: {$response}"];
+}
+
+/**
+ * Sends email via Resend REST API (HTTPS port 443).
+ */
+function send_via_resend($to, $subject, $htmlContent, $plainText, array $config) {
+    $apiKey = trim($config['resend_api_key']);
+    if (empty($apiKey)) {
+        return ['success' => false, 'error' => 'Resend API key missing'];
+    }
+
+    $url = 'https://api.resend.com/emails';
+    $sender = $config['from_email'];
+    // Resend test domain fallback if custom domain not verified
+    if (strpos($sender, '@gmail.com') !== false) {
+        $sender = 'onboarding@resend.dev';
+    }
+
+    $payload = [
+        'from'     => $config['from_name'] . ' <' . $sender . '>',
+        'to'       => [$to],
+        'subject'  => $subject,
+        'html'     => $htmlContent,
+        'text'     => $plainText,
+        'reply_to' => $config['reply_to'] ?: $config['from_email']
+    ];
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . $apiKey,
+        'Content-Type: application/json'
+    ]);
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlErr = curl_error($ch);
+    curl_close($ch);
+
+    if ($curlErr) {
+        return ['success' => false, 'error' => 'Resend connection error: ' . $curlErr];
+    }
+
+    $json = json_decode($response, true);
+    if ($httpCode >= 200 && $httpCode < 300 && isset($json['id'])) {
+        return ['success' => true, 'error' => null];
+    }
+
+    $msg = $json['message'] ?? ($response ?: "HTTP {$httpCode}");
+    return ['success' => false, 'error' => 'Resend error: ' . $msg];
+}
+
+/**
+ * Sends email via Brevo REST API (HTTPS port 443).
+ */
+function send_via_brevo($to, $subject, $htmlContent, $plainText, array $config) {
+    $apiKey = trim($config['brevo_api_key']);
+    if (empty($apiKey)) {
+        return ['success' => false, 'error' => 'Brevo API key missing'];
+    }
+
+    $url = 'https://api.brevo.com/v3/smtp/email';
+    $payload = [
+        'sender'      => ['name' => $config['from_name'], 'email' => $config['from_email']],
+        'to'          => [['email' => $to]],
+        'subject'     => $subject,
+        'htmlContent' => $htmlContent,
+        'textContent' => $plainText,
+        'replyTo'     => ['email' => $config['reply_to']]
+    ];
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'api-key: ' . $apiKey,
+        'Content-Type: application/json',
+        'Accept: application/json'
+    ]);
+
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlErr = curl_error($ch);
+    curl_close($ch);
+
+    if ($curlErr) {
+        return ['success' => false, 'error' => 'Brevo connection error: ' . $curlErr];
+    }
+
+    $json = json_decode($response, true);
+    if ($httpCode >= 200 && $httpCode < 300) {
+        return ['success' => true, 'error' => null];
+    }
+
+    $msg = $json['message'] ?? ($response ?: "HTTP {$httpCode}");
+    return ['success' => false, 'error' => 'Brevo error: ' . $msg];
+}
+
+/**
  * Pure PHP RFC-compliant SMTP client with TLS/SSL encryption.
  */
 function send_smtp_socket($to, $subject, $htmlContent, $plainText, array $config) {
     $host = $config['smtp_host'];
     $port = $config['smtp_port'];
     $secure = $config['smtp_secure'];
-    $timeout = 15;
+    $timeout = 4;
 
     $remoteHost = ($secure === 'ssl' || $port === 465) ? "ssl://{$host}" : "tcp://{$host}";
     $socket = @stream_socket_client("{$remoteHost}:{$port}", $errno, $errstr, $timeout);
 
     if (!$socket) {
-        return ['success' => false, 'error' => "Could not connect to SMTP server: {$errstr} ({$errno})"];
+        $hint = ($errno === 110 || strpos(strtolower($errstr), 'timed out') !== false || strpos(strtolower($errstr), 'refused') !== false)
+            ? " (Note: Render Free Tier blocks outbound ports 25, 465, and 587. Configure MAIL_WEBHOOK_URL, RESEND_API_KEY, or BREVO_API_KEY for HTTPS delivery)"
+            : "";
+        return ['success' => false, 'error' => "Could not connect to SMTP server {$host}:{$port} - {$errstr} ({$errno}){$hint}"];
     }
 
     stream_set_timeout($socket, $timeout);

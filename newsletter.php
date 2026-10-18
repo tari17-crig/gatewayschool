@@ -145,16 +145,27 @@ $mailResult = send_newsletter_confirmation(strtolower($email));
 
 // Check for duplicate key / already subscribed status
 if (!$supabaseResult['success'] && $supabaseResult['status'] === 409) {
-    sendResponse(true, 'You are already subscribed to our newsletter! A confirmation email has been sent to your inbox.', 200, $isAjax);
+    $msg = $mailResult['success']
+        ? 'You are already subscribed to our newsletter! A confirmation email has been sent to your inbox.'
+        : 'You are already subscribed to our newsletter!';
+    sendResponse(true, $msg, 200, $isAjax);
 }
 
 if ($supabaseResult['success'] || $alreadySubscribed) {
-    sendResponse(true, 'Thank you for subscribing! A confirmation email has been sent to your email inbox.', 200, $isAjax);
+    if ($mailResult['success']) {
+        sendResponse(true, 'Thank you for subscribing! A confirmation email has been sent to your email inbox.', 200, $isAjax);
+    } else {
+        error_log("Newsletter saved, but email dispatch failed: " . ($mailResult['error'] ?? 'Unknown mail error'));
+        sendResponse(true, 'Thank you for subscribing! You are registered for our latest updates and news.', 200, $isAjax);
+    }
 } else {
     // If Supabase failed but we saved locally, we still provide a good user experience
     if (file_exists($localLogFile)) {
         error_log("Supabase insert notice: " . ($supabaseResult['error'] ?? 'Unknown error') . " - saved to local backup.");
-        sendResponse(true, 'Thank you for subscribing! A confirmation email has been sent to your email inbox.', 200, $isAjax);
+        $msg = $mailResult['success']
+            ? 'Thank you for subscribing! A confirmation email has been sent to your email inbox.'
+            : 'Thank you for subscribing! You are registered for our latest updates and news.';
+        sendResponse(true, $msg, 200, $isAjax);
     } else {
         error_log("Newsletter subscription error: " . ($supabaseResult['error'] ?? 'Unknown error'));
         sendResponse(false, 'Unable to subscribe at the moment. Please try again shortly.', 500, $isAjax);

@@ -25,3 +25,9 @@ services:
         value: Gateway Education Services
       - key: SMTP_REPLY_TO
         value: taritech17@gmail.com
+      - key: MAIL_WEBHOOK_URL
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false

@@ -99,9 +99,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         body: JSON.stringify({ email: emailVal })
                     });
 
-                    const contentType = response.headers.get('content-type') || '';
-                    if (contentType.includes('application/json')) {
-                        const data = await response.json();
+                    let data = null;
+                    try {
+                        data = await response.json();
+                    } catch (parseErr) {
+                        // Response was not JSON
+                    }
+
+                    if (data && typeof data === 'object') {
                         if (response.ok && data.success) {
                             saved = true;
                             successMessage = data.message || successMessage;
